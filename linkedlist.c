@@ -99,12 +99,38 @@ Node* destroy(Node* head){
         return NULL;
 }
 
+Node* reverse_rec(Node* head){
+        //unsafe : may cause stack overflow in the long run with >100000 stack func calls
+        if(head == NULL || head->next == NULL)
+                return head;
+        Node* newhead = reverse_rec(head->next);
+        head->next->next = head;
+        head->next = NULL;
+        return newhead;
+}
+
+Node* reverse(Node* head){
+        if(head == NULL || head->next == NULL)
+                return head;
+        Node* prev = NULL;
+        Node* curr = head;
+        Node* ahead;
+        while(curr!=NULL){
+                ahead = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = ahead;
+        }
+        return prev;
+}
+
 int main(void){
-        Node* newnode = (Node*)malloc(sizeof(Node));
-        newnode->data = 16;
-        newnode->next = NULL;
+        Node* newnode = NULL;
+        newnode = add(newnode, 16);
         newnode = add(newnode, 6);
         newnode = addEnd(newnode, 17);
+        display(newnode);
+        newnode = reverse(newnode);
         display(newnode);
         newnode = RemoveHead(newnode);
         display(newnode);
