@@ -8,6 +8,10 @@ Node* stack_init(){
 }
 
 int peek(Node** top){
+        if(*top == NULL){
+                fprintf(stderr, "Error: Peek on empty stack\n");
+                return INT_MIN;
+        }
         return getData(*top);
 }
 
@@ -22,6 +26,10 @@ void push(Node** top, int data){
 
 
 int pop(Node** top){
+        if(*top == NULL){
+                fprintf(stderr, "Error: pop on empty stack \n");
+                return -1;
+        }
         int var = getData(*top);// local variable will get destroyed when the function is done
                                 // good practice to not return the pointer of the local variable
                                 // to avoid memory leaks and overflows and what not

@@ -11,6 +11,7 @@ Queue* queueInit(){
         Queue* q = (Queue*)malloc(sizeof(Queue));
         q->front = NULL;
         q->end = NULL;
+        return q;
 }
 
 void queueDisplay(Queue* q){
@@ -22,13 +23,13 @@ int frontData(Queue* q){
         return getData(q->front);
 }
 
-void enqueue(Queue* q, int data){
+void enqueue(Queue* q, int data){//this functions needs fixing
         q->front = addEnd(q->front, data);
         if(q->end == NULL){
                 q->end = q->front;
         }
         else{
-                q->end = next(q->end);
+                q->end = next(q->end);//this is dangerous 
         }
 }
 
