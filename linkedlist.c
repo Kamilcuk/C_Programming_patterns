@@ -34,7 +34,7 @@ int len(Node* head){
         }
         return size;
 }
-Node* add(Node* head, int data){
+Node* add(Node* head, int data){ //just to note that this function can be void return
         /*this function adds the data in front of the list*/
         Node* newNode = (Node*)malloc(sizeof(Node));
 
@@ -46,7 +46,7 @@ Node* add(Node* head, int data){
         return newNode;
 }
 
-Node* addEnd(Node* head, int data){
+Node* addEnd(Node* head, int data){//just to note that this function can be void return
         Node* newNode = (Node*)malloc(sizeof(Node));
         
         if(newNode == NULL)

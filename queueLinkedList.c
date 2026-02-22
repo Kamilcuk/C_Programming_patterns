@@ -18,6 +18,10 @@ void queueDisplay(Queue* q){
         display(q->end);
 }
 
+int frontData(Queue* q){
+        return getData(q->front);
+}
+
 void enqueue(Queue* q, int data){
         q->front = addEnd(q->front, data);
         if(q->end == NULL){
@@ -27,7 +31,14 @@ void enqueue(Queue* q, int data){
                 q->end = next(q->end);
         }
 }
-                
+
+int dequeue(Queue* q){
+        int var = frontData(q);
+        q->front = removeHead(q->front);
+        if(q->front == NULL)
+                q->end = NULL;
+        return var;
+}       
 
 int main(void){
         Queue* q = queueInit();
@@ -35,5 +46,7 @@ int main(void){
         enqueue(q, 17);
         enqueue(q, 18);
         queueDisplay(q);
+        while(q->front != NULL)
+                printf("%d \t", dequeue(q));
         return 0;
 }
