@@ -1,23 +1,26 @@
 #include <stdio.h>
+#include <stdbool.h>
+/*The entire purpose of the code is to somewhat emulate the functionality of generator/yield 
+ * functions like the ones present in python or lua*/
 
 typedef struct{
-        int _pc;
+        bool resume;//resume variable exists as a flag to check whether to start new or continue from before
         int a;
         int b;
-}fib_frame;
+}fib_frame;//the struct frame is created to store the progress of generator
 
 int fib_next(fib_frame *f){
 
-        switch(f->_pc){
-                case 0: goto start;
-                case 1: goto resume_1;
-        }
+        if(f->resume)
+                goto resume_1;
+        else
+                goto start;
         start:
         f->a = 0;
         f->b = 1;
 
         while(1){
-                f->_pc = 1;
+                f->resume = true;
                 return f->a;
 
                 resume_1:
@@ -28,7 +31,7 @@ int fib_next(fib_frame *f){
 }
 
 int main(){
-        fib_frame f = {0};
+        fib_frame f = {false};
         for (int i = 0; i<10; i++){
                 printf("%d ", fib_next(&f));
         }
